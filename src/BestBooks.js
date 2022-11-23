@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import BookFormModal from './BookFormModal';
-import { Button, Modal, Form, Carousel} from 'react-bootstrap';
+import { Button, Container, Carousel} from 'react-bootstrap';
 
 // let server = process.env.REACT_APP_SERVER;
 
@@ -32,7 +32,6 @@ class BestBooks extends React.Component {
       // axios.post will return the cat that was added to the database with the ID and version number
       // axios.post takes in 2 parameters: the URL endpoint, and the thing we want added:
       let bookThatWasAdded = await axios.post(`${process.env.REACT_APP_SERVER}/books`, aBook);
-      console.log(bookThatWasAdded);
       this.setState({
         books: [...this.state.books, bookThatWasAdded.data]
       });
@@ -41,27 +40,26 @@ class BestBooks extends React.Component {
     }
   }
 
-  // deleteCat = async (id) => {
-  //   // ex URL:
-  //   // http://localhost:3001/cats/637bceabc57c693faee21e8f
-  //   try {
-  //     let url = `${SERVER}/cats/${id}`;
-  //     // do not assume that axios.delete() will return a value
-  //     await axios.delete(url);
-  //     // // this is ok for today's lab
-  //     // this.getCats();
-  //     let updatedCats = this.state.cats.filter(cat => cat._id !== id);
-  //     this.setState({
-  //       cats: updatedCats
-  //     })
-  //   } catch (err) {
-  //     console.log('We have an error: ', err.response.data);
-  //   }
-  // }
+  deleteBook = async (id) => {
+    // ex URL:
+    // http://localhost:3001/cats/637bceabc57c693faee21e8f
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/books/${id}`;
+      // do not assume that axios.delete() will return a value
+      await axios.delete(url);
+      // // this is ok for today's lab
+      // this.getCats();
+      let updatedBooks = this.state.books.filter(book => book._id !== id);
+      this.setState({
+        books: updatedBooks,
+      });
+    } catch (err) {
+      console.log('We have an error: ', err.response.data);
+    }
+  }
 
   handleBookSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
     let newBook = {
       title: e.target.title.value,
       description: e.target.description.value,
@@ -90,13 +88,28 @@ class BestBooks extends React.Component {
 
     /* TODO: render all the books in a Carousel */
     // Carousel constructor
-    let carouselItems = this.state.books.map( book => {
+    let carouselItems = this.state.books.map(book => {
       return (
-        <Book 
-          book={book} 
-          key={book._id}
-          // deleteCat={this.props.deleteBook}
-        />
+        <Carousel.Item key={book._id}>
+          <img
+            className="d-block w-100"
+            src="https://via.placeholder.com/500"
+            alt="Books"
+            width="500"
+            height="400"
+          />
+          <Carousel.Caption>
+            <p>{book.title}</p>
+            <p>{book.description}</p>
+            <p>{book.status}</p>
+            <Button onClick={() => this.deleteBook(book._id)}>Remove Book</Button>
+          </Carousel.Caption>
+        </Carousel.Item>
+        // <Book 
+        //   book={book} 
+        //   key={book._id}
+        //   deleteBook={this.deleteBook}
+        // />
       )
     });
 
@@ -105,9 +118,11 @@ class BestBooks extends React.Component {
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
         {this.state.books.length ? (
-          <Carousel>
-            {carouselItems}
-          </Carousel>
+          <Container>
+            <Carousel>
+              {carouselItems}
+            </Carousel>
+          </Container>
         ) : (
           <h3>No Books Found :(</h3>
         )}
@@ -123,19 +138,31 @@ class BestBooks extends React.Component {
   }
 }
 
-class Book extends React.Component {
-  render () {
-    return (
-      <>
-        <Carousel.Item>
-          <p>{this.props.book.title}</p>
-          <p>{this.props.book.description}</p>
-          <p>{this.props.book.status}</p>
-        </Carousel.Item>
-      </>
-    );
+// class Book extends React.Component {
+//   render () {
+//     return (
+//       <>
+//         <Carousel.Item 
+//           key={this.props.key}
+//         >
+//           <img
+//             className="d-block w-100"
+//             src="https://via.placeholder.com/500"
+//             alt="Books"
+//             width="500"
+//             height="100"
+//           />
+//           <Carousel.Caption>
+//             <p>{this.props.book.title}</p>
+//             <p>{this.props.book.description}</p>
+//             <p>{this.props.book.status}</p>
+//             <Button onClick={() => this.props.deleteBook(this.props.book._id)}>Remove Book</Button>
+//           </Carousel.Caption>
+//         </Carousel.Item>
+//       </>
+//     );
 
-  }
-}
+//   }
+// }
 
 export default BestBooks;

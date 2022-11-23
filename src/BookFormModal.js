@@ -1,6 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import { Button, Modal, Form, Carousel} from 'react-bootstrap';
+import { Button, Modal, Form } from 'react-bootstrap';
 
 class BookFormModal extends React.Component {
   render() {
