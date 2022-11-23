@@ -17,7 +17,7 @@ class App extends React.Component {
     return (
       <>
         <Router>
-          <Header />
+          <Header id="header"/>
           <Routes>
             <Route 
               exact path="/"
@@ -30,7 +30,7 @@ class App extends React.Component {
             >
             </Route>
           </Routes>
-          <Footer />
+          <Footer id="footer"/>
         </Router>
       </>
     )

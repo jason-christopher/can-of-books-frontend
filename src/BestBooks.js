@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
 import axios from 'axios';
 import BookFormModal from './BookFormModal';
@@ -93,16 +94,20 @@ class BestBooks extends React.Component {
         <Carousel.Item key={book._id}>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/500"
+            src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/sv199317-image-kwvufyxm.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=2f9ae0de50355b994978237208c55341"
             alt="Books"
-            width="500"
-            height="400"
+            height="450"
           />
-          <Carousel.Caption>
-            <p>{book.title}</p>
-            <p>{book.description}</p>
-            <p>{book.status}</p>
-            <Button onClick={() => this.deleteBook(book._id)}>Remove Book</Button>
+          <Carousel.Caption >
+            <section className="descriptionDiv">
+              <p className="bookTitle">{book.title}</p>
+              <p className="bookDescription">{book.description}</p>
+              <div className="bookModifyDiv">
+                {book.status ? <img className="bookHeart" src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678087-heart-128.png" alt="full heart"/> : <img className="bookHeart" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-128.png" alt="empty heart"/>}
+                <Button className="button" onClick={() => this.deleteBook(book._id)}>Modify Book</Button>
+                <Button className="button" onClick={() => this.deleteBook(book._id)}>Remove Book</Button>
+              </div>
+            </section>
           </Carousel.Caption>
         </Carousel.Item>
         // <Book 
@@ -115,19 +120,20 @@ class BestBooks extends React.Component {
 
     return (
       <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-
+        <div id="libraryDiv">
+          <img id="libraryPic" src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Photo by Susan Q Yin on Unsplash" />
+          <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
+          <Button onClick={this.showModal} id="addBookButton">Add Book</Button>
+        </div>
         {this.state.books.length ? (
           <Container>
-            <Carousel>
+            <Carousel className="carousel">
               {carouselItems}
             </Carousel>
           </Container>
         ) : (
           <h3>No Books Found :(</h3>
         )}
-
-        <Button onClick={this.showModal} >Add Book</Button>
         <BookFormModal 
           isModalShown={this.state.isModalShown}
           handleBookSubmit={this.handleBookSubmit}
