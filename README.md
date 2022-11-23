@@ -1,23 +1,24 @@
 # Can of Books - Front End
 
 **Author**: Tracy Oakley & Jason Christopher
-**Version**: 1.0.3
+**Version**: 2.0.2
 
 ## Overview
 
-App allows user to pull books from a database and display their title, description, and status.
+App allows user to pull books from a database and display their title, description, and status. Also allows user to add and delete books from the database.
 
 ## Getting Started
 
-User just needs needs to navigate to the home page to display all books.
+From the Home page, the user can select the Add Book button to add a book. Then, in the carousel, the user may select the Remove Book button to remove the desired book from the database.
 
 ## Architecture
 
-When the client navigates to the Home page, the app contacts the server, which in turn contacts Mongo to pull all the books and their data to be displayed to the client.
+When the client navigates to the Home page, the app contacts the server, which in turn contacts Mongo to pull all the books and their data to be displayed to the client. When as book is added, a POST request is sent to Mongo via the database. Likewise, when as book is deleted, a DELETE request is sent to Mongo via the database.
 
 ## Change Log
 
 * 11-21-2022 6:57pm - Application now pulls all books from the Mongo DB via the backend server.
+* 11-22-2022 6:16pm - Application allows user to add/delete book from database.
 
 ## Time Estimations
 
@@ -38,6 +39,18 @@ When the client navigates to the Home page, the app contacts the server, which i
 * Start time: 5pm
 * Finish time: 7pm
 * Actual time needed to complete: 2 hours
+
+* Name of feature: Create Book
+* Estimate of time needed to complete: 2 hrs
+* Start time: 3:30pm
+* Finish time: 4:30pm
+* Actual time needed to complete: 1 hour
+
+* Name of feature: Delete Book
+* Estimate of time needed to complete: 2 hrs
+* Start time: 4:30pm
+* Finish time: 6pm
+* Actual time needed to complete: 1.5 hours
 
 ## Contracts
 
