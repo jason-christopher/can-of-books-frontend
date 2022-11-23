@@ -7,7 +7,8 @@
   display: flex;
   justify-content: space-between;
   padding: 0;
-  background-color: ivory;
+  background-color: orange;
+  border: 1px solid black;
 }
 
 #navBrand{
@@ -19,8 +20,9 @@
   width: 150px;
   height: 150px;
   padding: 20px;
+  margin-left: 8px;
   border: 20px solid black;
-  background-color:ivory;
+  background-color: ghostwhite;
 }
 
 #nameDiv{
@@ -60,13 +62,15 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
+  border: 1px solid black;
 }
 
 #libraryPic{
   width: 1400px;
-  height: 200px;
+  height: 125px;
   object-fit: fill;
   opacity: 0.6;
+  background-image: linear-gradient(to right, black, rgb(189, 189, 189, 0), black);
 }
 
 h2{
@@ -99,8 +103,12 @@ h2{
   background-color: red;
 }
 
+#main{
+  background-color: black;
+}
+
 .carousel{
-  width: 1300px;
+  width: 1290px;
   margin: 0 auto;
 }
 
@@ -172,12 +180,51 @@ h2{
   border: 2px solid black;
 }
 
+#aboutUs{
+  width: 1400px;
+  margin: 0 auto;
+  background-image: linear-gradient(grey, white, grey);
+}
+
+.individual{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.aboutUsPic{
+  height: 400px;
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+h5{
+  font-size: 60px;
+  font-family: Impact,'Arial Narrow Bold', sans-serif;
+  padding: 0 20px;
+}
+
+.individual p{
+  font-size: 20px;
+  padding: 20px;
+}
+
+#line{
+  width: 1300px;
+  margin: 0 auto;
+  height: 2px;
+  background-image: linear-gradient(to right, rgb(189, 189, 189, 0), black, rgb(189, 189, 189, 0));
+}
+
 #footer{
   width: 1400px;
   margin: 0 auto;
-  background-color: ivory;
+  background-color: orange;
   display: flex;
   justify-content: space-around;
+  border: 1px solid black;
 }
 
 #footerBrand{

@@ -6,40 +6,30 @@ class BookFormModal extends React.Component {
 
     return (
       <>
-        <Modal show={this.props.isModalShown} onHide={this.props.handleCloseModal} animation={false} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+        <Modal show={this.props.isModalShown} onHide={this.props.handleCloseModal} animation={false} centered className="modal">
+          <Modal.Header className="modalHeader" closeButton>
+            <div className="modalTitleDiv">
+              <Modal.Title>{this.props.mode === 'add' ? 'Add a Book' : 'Modify a Book'}</Modal.Title>
+            </div>
           </Modal.Header>
           <Modal.Body>
-          <Form onSubmit={this.props.handleBookSubmit}>
+          <Form onSubmit={this.props.mode === 'add' ? this.props.handleBookSubmit : this.props.handleBookUpdate}>
             <Form.Group className="mb-3" controlId="title">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Enter title" />
-              {/* <Form.Text className="text-muted">
-                Insert Book title here. */}
-              {/* </Form.Text> */}
+              <Form.Control type="text" placeholder={this.props.mode === 'add' ? "Enter title" : this.props.bookToModify.title} />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="description">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="text" placeholder="Add Description" />
+              <Form.Control type="text" placeholder={this.props.mode === 'add' ? "Add description" : this.props.bookToModify.description}  />
             </Form.Group>
             <Form.Group className="mb-3" controlId="status">
               <Form.Check type="checkbox" label="Favorites" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="button">
               Submit
             </Button>
           </Form>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.props.handleCloseModal}>
-              Close
-            </Button>
-            {/* <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button> */}
-          </Modal.Footer>
         </Modal>
       </>
     )
