@@ -12,6 +12,8 @@ class BestBooks extends React.Component {
     this.state = {
       books: [],
       isModalShown: false,
+      mode: 'add', 
+      bookToModify: {},
     }
   }
 
@@ -59,6 +61,23 @@ class BestBooks extends React.Component {
     }
   }
 
+  updateBook = async (bookToUpdate) => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/books/${bookToUpdate._id}`;
+      let updatedBookObj = await axios.put(url, bookToUpdate);
+      // find the book we updated in state and replace it with the data we got back from the DB
+      let updatedBooksArray  = this.state.books.map(book => {
+        return book._id === bookToUpdate._id ? updatedBookObj.data : book;
+      });
+      this.setState({
+        books: updatedBooksArray,
+      });
+      console.log(this.state.books);
+    } catch (err) {
+      console.log('We have an error: ', err.response.data);
+    }
+  }
+
   handleBookSubmit = (e) => {
     e.preventDefault();
     let newBook = {
@@ -66,14 +85,48 @@ class BestBooks extends React.Component {
       description: e.target.description.value,
       status: e.target.status.checked,
     }
+    this.setState({
+      isModalShown: false,
+    })
     this.postBook(newBook);
   }
 
-  showModal = () => {
+  handleBookUpdate = (e) => {
+    e.preventDefault();
+    let Book = {
+      title: e.target.title.value || this.state.bookToModify.title,
+      description: e.target.description.value || this.state.bookToModify.description,
+      status: e.target.status.checked || this.state.bookToModify.status,
+      __v: 0,
+      _id: this.state.bookToModify._id,
+    }
     this.setState({
-      isModalShown: true,
+      isModalShown: false,
     })
+    this.updateBook(Book);
   }
+
+  handleFavorite = (book) => {
+    let newStatus = '';
+    if(book.status === false) {
+      newStatus = true;
+    } else {
+      newStatus = false;
+    }
+    let Book = {
+      title: book.title,
+      description: book.description,
+      status: newStatus,
+      __v: 0,
+      _id: book._id,
+    }
+    this.updateBook(Book);
+  }
+
+  // showModal = (inputMode, bookID) => {
+  //   let newMode = inputMode;
+  //   this.setState({isModalShown: true, mode: newMode,})
+  // }
 
   handleCloseModal = () => {
     this.setState({
@@ -103,8 +156,15 @@ class BestBooks extends React.Component {
               <p className="bookTitle">{book.title}</p>
               <p className="bookDescription">{book.description}</p>
               <div className="bookModifyDiv">
-                {book.status ? <img className="bookHeart" src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678087-heart-128.png" alt="full heart"/> : <img className="bookHeart" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-128.png" alt="empty heart"/>}
-                <Button className="button" onClick={() => this.deleteBook(book._id)}>Modify Book</Button>
+                <img 
+                  className="bookHeart" 
+                  src={book.status ? "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678087-heart-128.png" : "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-128.png"} 
+                  alt="heart" 
+                  onClick={() => {
+                    this.setState({bookToModify: book});
+                    this.handleFavorite(book);
+                  }}/>
+                <Button className="button" onClick={() => this.setState({isModalShown: true, mode: 'update', bookToModify: book})}>Modify Book</Button>
                 <Button className="button" onClick={() => this.deleteBook(book._id)}>Remove Book</Button>
               </div>
             </section>
@@ -123,7 +183,7 @@ class BestBooks extends React.Component {
         <div id="libraryDiv">
           <img id="libraryPic" src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Photo by Susan Q Yin on Unsplash" />
           <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-          <Button onClick={this.showModal} id="addBookButton">Add Book</Button>
+          <Button onClick={() => this.setState({isModalShown: true, mode: 'add'})}id="addBookButton">Add Book</Button>
         </div>
         {this.state.books.length ? (
           <Container>
@@ -136,7 +196,10 @@ class BestBooks extends React.Component {
         )}
         <BookFormModal 
           isModalShown={this.state.isModalShown}
+          mode={this.state.mode}
+          bookToModify={this.state.bookToModify}
           handleBookSubmit={this.handleBookSubmit}
+          handleBookUpdate={this.handleBookUpdate}
           handleCloseModal={this.handleCloseModal}
         />
       </>
