@@ -13,7 +13,7 @@ class About extends Component {
               <p>I have just completed a Software Developer Bootcamp from Code Fellows that focused on the MERN stack. And before that I was a US Naval Officer aboard the USS Nevada. I have transitioned my skills in project management and problem solving from the Navy to the software development domain. My interest in software began when I was in college, but when I was in the Navy, I got to create work packages. Work packages are like software projects as they require precise syntax, logic and complex coordination and these experiences with their many review and tests cycles, I found I really enjoyed. I have found even more enjoyment in building coding projects and bringing them to life. Hoping to find a role that deals with feature creation and products to improve user experience or gain exposure in refactoring legacy code bases.</p>
           </section>
         </article>
-        <div id="line"></div>
+        <div className="line"></div>
         <article className="individual">
           <section>
             <h5>Jason Christopher</h5>

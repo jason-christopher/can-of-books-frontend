@@ -22,9 +22,9 @@ class BookFormModal extends React.Component {
               <Form.Label>Description</Form.Label>
               <Form.Control type="text" placeholder={this.props.mode === 'add' ? "Add description" : this.props.bookToModify.description}  />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="status">
+            {this.props.mode === 'add' ? <Form.Group className="mb-3" controlId="status">
               <Form.Check type="checkbox" label="Favorites" />
-            </Form.Group>
+            </Form.Group> : ''}
             <Button variant="primary" type="submit" className="button">
               Submit
             </Button>

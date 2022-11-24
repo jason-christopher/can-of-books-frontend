@@ -92,7 +92,7 @@ class BestBooks extends React.Component {
     let Book = {
       title: e.target.title.value || this.state.bookToModify.title,
       description: e.target.description.value || this.state.bookToModify.description,
-      status: e.target.status.checked || this.state.bookToModify.status,
+      status: this.state.bookToModify.status,
       __v: 0,
       _id: this.state.bookToModify._id,
     }
@@ -138,7 +138,7 @@ class BestBooks extends React.Component {
             className="d-block w-100"
             src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/sv199317-image-kwvufyxm.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=2f9ae0de50355b994978237208c55341"
             alt="Books"
-            height="450"
+            height="600"
           />
           <Carousel.Caption >
             <section className="descriptionDiv">
@@ -164,13 +164,8 @@ class BestBooks extends React.Component {
 
     return (
       <>
+        <div className="line2"></div>
         <div id="libraryDiv">
-          <section 
-            id="libraryPic" 
-            // src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" 
-            // alt="Photo by Susan Q Yin on Unsplash" 
-          />
-          <h2>My Library</h2>
           <Button onClick={() => this.setState({isModalShown: true, mode: 'add'})}id="addBookButton">Add Book</Button>
         </div>
         {this.state.books.length ? (
