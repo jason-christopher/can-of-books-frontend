@@ -1,24 +1,25 @@
 # Can of Books - Front End
 
 **Author**: Tracy Oakley & Jason Christopher
-**Version**: 2.0.2
+**Version**: 3.0.2
 
 ## Overview
 
-App allows user to pull books from a database and display their title, description, and status. Also allows user to add and delete books from the database.
+App allows user to pull books from a database and display their title, description, and status. Also allows user to add, modify, favorite, or delete books from the database.
 
 ## Getting Started
 
-From the Home page, the user can select the Add Book button to add a book. Then, in the carousel, the user may select the Remove Book button to remove the desired book from the database.
+From the Home page, the user can select the Add Book button to add a book. Then, in the carousel, the user may select the Modify Book or Remove Book button to update or remove the desired book from the database. The user may also select the heart icon to make the book a favorite.
 
 ## Architecture
 
-When the client navigates to the Home page, the app contacts the server, which in turn contacts Mongo to pull all the books and their data to be displayed to the client. When as book is added, a POST request is sent to Mongo via the database. Likewise, when as book is deleted, a DELETE request is sent to Mongo via the database.
+When the client navigates to the Home page, the app contacts the server, which in turn contacts Mongo to pull all the books and their data to be displayed to the client. When as book is added, a POST request is sent to Mongo via the database. Likewise, when as book is deleted or updated, a DELETE or PUT request is sent to Mongo via the database.
 
 ## Change Log
 
 * 11-21-2022 6:57pm - Application now pulls all books from the Mongo DB via the backend server.
 * 11-22-2022 6:16pm - Application allows user to add/delete book from database.
+* 11-23-2022 5:00pm - Application allows user to modify and favorite a book.
 
 ## Time Estimations
 
@@ -51,6 +52,12 @@ When the client navigates to the Home page, the app contacts the server, which i
 * Start time: 4:30pm
 * Finish time: 6pm
 * Actual time needed to complete: 1.5 hours
+
+* Name of feature: Update a Resource
+* Estimate of time needed to complete: 2 hrs
+* Start time: 3pm
+* Finish time: 4pm
+* Actual time needed to complete: 1 hour
 
 ## Contracts
 
